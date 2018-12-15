@@ -1,13 +1,10 @@
 # Adobe XD Serializer
 
-
-
 ## Credit
 
-This project was originally started as a fork of [xd-json-wrapper](https://github.com/svschannak/xd-json-wrapper). However, the goals of this project and particular use cases were unique enough that it no longer seemed a long lived fork was not an appropriate mechanism. The goal of `adobexd-serializer` is to provide a modular means of serialization for adobexd trees while `xd-json-wrapper` currently only supports json serialization of singular nodes. Additionally `adobexd-serializer` intends to provide a streaming approach, built as a tree-shakeable, typescript library. 
+This project was originally started as a fork of [xd-json-wrapper](https://github.com/svschannak/xd-json-wrapper). However, the goals of this project and particular use cases were unique enough that it no longer seemed a long lived fork was not an appropriate mechanism. The goal of `adobexd-serializer` is to provide a modular means of serialization for adobexd trees while `xd-json-wrapper` currently only supports json serialization of singular nodes. Additionally `adobexd-serializer` intends to provide a streaming approach, built as a tree-shakeable, typescript library.
 
-Given though that the core originally started from the work of `xd-json-wrapper` we intend for certain objects to be interoperable, specifically the node types. 
-
+Given though that the core originally started from the work of `xd-json-wrapper` we intend for certain objects to be interoperable, specifically the node types.
 
 # MIT License
 
