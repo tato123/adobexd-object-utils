@@ -7,7 +7,7 @@ import json from 'rollup-plugin-json'
 
 const pkg = require('./package.json')
 
-const libraryName = 'adobexd-serializer'
+const libraryName = 'adobexd-object-utils'
 
 export default {
   input: `src/index.ts`,
