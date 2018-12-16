@@ -2,8 +2,8 @@
   "name": "adobexd-object-utils",
   "version": "1.0.0",
   "description": "Wrapper for XD Elements, Artboard and document to convert to json",
-  "main": "dist/adobexd-serializer.js",
-  "typings": "dist/types/adobexd-serializer.d.ts",
+  "main": "dist/adobexd-object-utils.js",
+  "typings": "dist/types/adobexd-object-utils.d.ts",
   "files": [
     "dist"
   ],
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tato123/adobexd-serializer.git"
+    "url": "git+https://github.com/tato123/adobexd-object-utils.git"
   },
   "keywords": [
     "adobe",
@@ -97,10 +97,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 90,
-        "functions": 95,
-        "lines": 95,
-        "statements": 95
+        "branches": 0,
+        "functions": 0,
+        "lines": 0,
+        "statements": 0
       }
     },
     "collectCoverageFrom": [
