@@ -1,7 +1,6 @@
-/// <reference path="./@types/scenegraph.d.ts" />
-/// <reference path="./@types/index.d.ts" />
-
 import * as NodeTypes from './node'
+import { SceneNode } from './@types/scenegraph'
+import deepMap from 'deep-map'
 
 interface AllocObject {
   constructor: {
@@ -22,36 +21,25 @@ function getXDWrapper(node: AllocObject): XdWrapper | undefined {
   return undefined
 }
 
-function getArtboardAsJSON(artboard): Array<NodeTypes.SerializedNode> {
-  const children: Array<NodeTypes.SerializedNode> = []
-
-  artboard.children.forEach(node => {
-    if (getXDWrapper(node) !== undefined) {
-      const result: any = getXDWrapper(node)
-      if (result) {
-        children.push(result)
-      }
+function iterator(sceneNode: SceneNode): Array<NodeTypes.SerializedNode> {
+  return sceneNode.children.map(node => {
+    const wrapper = getXDWrapper(node)
+    return {
+      ...wrapper,
+      children: node.children.map(iterator)
     }
   })
-
-  return children
 }
 
-function getDocumentAsJSON(documentRoot): Array<NodeTypes.SerializedNode> {
-  const children: Array<NodeTypes.SerializedNode> = []
-
-  documentRoot.children.forEach(artboard => {
-    const result: any = getArtboardAsJSON(artboard)
-    if (result) {
-      children.push(result)
-    }
-  })
-
-  return children
+/**
+ * Takes a selection of items from AdobeXD and serializes to JSON
+ *
+ * @param selection
+ */
+function serialize(selection: Array<SceneNode>) {
+  return selection.length === 0 ? [] : selection.map(iterator)
 }
 
 module.exports = {
-  getXDWrapper: getXDWrapper,
-  getArtboardAsJSON: getArtboardAsJSON,
-  getDocumentAsJSON: getDocumentAsJSON
+  serialize: serialize
 }

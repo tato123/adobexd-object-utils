@@ -2,8 +2,7 @@
   "name": "adobexd-serializer",
   "version": "1.0.0",
   "description": "Wrapper for XD Elements, Artboard and document to convert to json",
-  "main": "dist/adobexd-serializer.umd.js",
-  "module": "dist/adobexd-serializer.es5.js",
+  "main": "dist/adobexd-serializer.js",
   "typings": "dist/types/adobexd-serializer.d.ts",
   "files": [
     "dist"
@@ -116,5 +115,8 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "dependencies": {
+    "deep-map": "^1.5.0"
   }
 }

@@ -21,7 +21,6 @@ export default class ArtboardWrapper implements JsonSerializer {
     const node = this.xdNode
     return {
       type: node.constructor.name,
-
       width: node.width,
       height: node.height,
       viewportHeight: node.viewportHeight,
