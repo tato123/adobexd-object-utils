@@ -2,32 +2,27 @@ import { Rectangle } from '../@types/scenegraph'
 import GraphicsNode from './GraphicsNode'
 import { SerializedNode, JsonSerializer } from './SerializedNode'
 
-export default class XDRectangleWrapper implements JsonSerializer {
-  private xdNode: Rectangle
-  private parentNodeWrapper: GraphicsNode
+export default class RectangleWrapper extends GraphicsNode implements JsonSerializer {
+  private rectangeWrapper: Rectangle
 
   constructor(xdNode: Rectangle) {
-    this.xdNode = xdNode
-    this.parentNodeWrapper = new GraphicsNode(this.xdNode)
+    super(xdNode)
+    this.rectangeWrapper = xdNode
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
-    if (this.parentNodeWrapper) {
-      result = this.parentNodeWrapper.toJSON()
-    }
-
-    const node = this.xdNode
-    return {
-      type: node.constructor.name,
-
-      width: node.width,
-      height: node.height,
-      cornerRadii: node.cornerRadii,
-      hasRoundedCorners: node.hasRoundedCorners,
-      effectiveCornerRadii: node.effectiveCornerRadii,
-      ...result
-    }
+    const node = this.rectangeWrapper
+    return Object.assign(
+      {},
+      {
+        type: node.constructor.name,
+        width: node.width,
+        height: node.height,
+        cornerRadii: node.cornerRadii,
+        hasRoundedCorners: node.hasRoundedCorners,
+        effectiveCornerRadii: node.effectiveCornerRadii
+      },
+      super.toJSON()
+    )
   }
 }

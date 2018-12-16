@@ -2,28 +2,24 @@ import { BooleanGroup } from '../@types/scenegraph'
 import GraphicsNodeWrapper from './GraphicsNode'
 import { SerializedNode, JsonSerializer } from './SerializedNode'
 
-export default class XDBooleanGroupWrapper implements JsonSerializer {
-  private xdNode: BooleanGroup
-  private parentNodeWrapper: GraphicsNodeWrapper
+export default class XDBooleanGroupWrapper extends GraphicsNodeWrapper implements JsonSerializer {
+  private booleanGroup: BooleanGroup
 
   constructor(xdNode: BooleanGroup) {
-    this.xdNode = xdNode
-    this.parentNodeWrapper = new GraphicsNodeWrapper(this.xdNode)
+    super(xdNode)
+    this.booleanGroup = xdNode
   }
 
   toJSON(): SerializedNode {
-    let result = {}
+    const node = this.booleanGroup
+    return Object.assign(
+      {},
+      {
+        type: node.constructor.name,
 
-    if (this.parentNodeWrapper) {
-      result = this.parentNodeWrapper.toJSON()
-    }
-
-    const node = this.xdNode
-    return {
-      type: node.constructor.name,
-
-      pathOp: node.pathOp,
-      ...result
-    }
+        pathOp: node.pathOp
+      },
+      super.toJSON()
+    )
   }
 }

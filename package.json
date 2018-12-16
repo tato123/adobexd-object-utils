@@ -1,5 +1,5 @@
 {
-  "name": "adobexd-serializer",
+  "name": "adobexd-object-utils",
   "version": "1.0.0",
   "description": "Wrapper for XD Elements, Artboard and document to convert to json",
   "main": "dist/adobexd-serializer.js",

@@ -1,10 +1,43 @@
-# Adobe XD Serializer
+# Adobe XD CC Object Utils
+
+The goal of `adobexd-object-utils` is to provide a base set of helper tools, similar to lodash
+
+## Installation
+
+If using yarn:
+
+```
+yarn add adobexd-object-utils
+```
+
+If using npm
+
+```
+npm install adobexd-object-utils
+```
+
+## Usage
+
+Sample printing out a JSON representation (automatically deep mapped)
+
+```
+const { serialize } = require('./adobexd-serializer')
+
+async function serializeObject(selection) {
+  const json = serialize(selection.items)
+  console.log(JSON.stringify(json))
+}
+
+module.exports = {
+  commands: {
+    serializeObject: serializeObject
+  }
+}
+```
 
 ## Credit
 
-This project was originally started as a fork of [xd-json-wrapper](https://github.com/svschannak/xd-json-wrapper). However, the goals of this project and particular use cases were unique enough that it no longer seemed a long lived fork was not an appropriate mechanism. The goal of `adobexd-serializer` is to provide a modular means of serialization for adobexd trees while `xd-json-wrapper` currently only supports json serialization of singular nodes. Additionally `adobexd-serializer` intends to provide a streaming approach, built as a tree-shakeable, typescript library.
-
-Given though that the core originally started from the work of `xd-json-wrapper` we intend for certain objects to be interoperable, specifically the node types.
+This project was originally started as a fork of [xd-json-wrapper](https://github.com/svschannak/xd-json-wrapper). However, the goals of this project and particular use cases were unique enough that it no longer seemed a long lived fork was an appropriate mechanism.
 
 # MIT License
 

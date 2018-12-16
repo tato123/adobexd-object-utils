@@ -2,6 +2,29 @@ import { Artboard, SceneNode } from './scenegraph'
 
 export {}
 
+export class SceneNodeList {
+  public items: SceneNode[]
+  public readonly length: number
+
+  public forEach(callback: (sceneNode: SceneNode, index: number) => void, thisArg?: object): void
+
+  public forEachRight(
+    callback: (sceneNode: SceneNode, index: number) => void,
+    thisArg?: object
+  ): void
+
+  public filter(
+    callback: (sceneNode: SceneNode, index: number) => boolean,
+    thisArg?: object
+  ): Array<SceneNode>
+
+  public map(callback: (sceneNode: SceneNode, index: number) => any, thisArg?: object): Array<any>
+
+  public some(callback: (sceneNode: SceneNode, index: number) => boolean, thisArg?: object): boolean
+
+  public at(index: number): SceneNode | null
+}
+
 declare global {
   /**
    * Represents the children of a scenenode. Typically accessed via the SceneNode.children property.

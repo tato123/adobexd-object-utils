@@ -2,28 +2,23 @@ import { Group } from '../@types/scenegraph'
 import SceneNode from './SceneNode'
 import { SerializedNode, JsonSerializer } from './SerializedNode'
 
-export default class XDGroupWrapper implements JsonSerializer {
-  private xdNode: Group
-  private parentNodeWrapper: SceneNode
+export default class GroupWrapper extends SceneNode implements JsonSerializer {
+  private groupWrapper: Group
 
   constructor(xdNode: Group) {
-    this.xdNode = xdNode
-    this.parentNodeWrapper = new SceneNode(this.xdNode)
+    super(xdNode)
+    this.groupWrapper = xdNode
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
-    if (this.parentNodeWrapper) {
-      result = this.parentNodeWrapper.toJSON()
-    }
-
-    const node = this.xdNode
-    return {
-      type: node.constructor.name,
-
-      mask: node.mask,
-      ...result
-    }
+    const node = this.groupWrapper
+    return Object.assign(
+      {},
+      {
+        type: node.constructor.name,
+        mask: node.mask
+      },
+      super.toJSON()
+    )
   }
 }

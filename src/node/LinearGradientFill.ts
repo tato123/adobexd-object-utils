@@ -9,8 +9,6 @@ export default class XDLinearGradientFillWrapper implements JsonSerializer {
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
     const node = this.xdNode
     return {
       type: node.constructor.name,
@@ -19,8 +17,7 @@ export default class XDLinearGradientFillWrapper implements JsonSerializer {
       startX: node.startX,
       startY: node.startY,
       endX: node.endX,
-      endY: node.endY,
-      ...result
+      endY: node.endY
     }
   }
 }

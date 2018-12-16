@@ -9,18 +9,14 @@ export default class XDShadowWrapper implements JsonSerializer {
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
     const node = this.xdNode
     return {
       type: node.constructor.name,
-
       x: node.x,
       y: node.y,
       blur: node.blur,
       color: node.color,
-      visible: node.visible,
-      ...result
+      visible: node.visible
     }
   }
 }

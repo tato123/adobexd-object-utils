@@ -9,13 +9,11 @@ export default class XDMatrixWrapper implements JsonSerializer {
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
     const node = this.xdNode
     return {
       type: node.constructor.name,
-
-      ...result
+      hasSkey: node.hasSkew(),
+      translate: node.getTranslate()
     }
   }
 }

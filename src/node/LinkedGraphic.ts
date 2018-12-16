@@ -2,27 +2,22 @@ import { LinkedGraphic } from '../@types/scenegraph'
 import SceneNode from './SceneNode'
 import { SerializedNode, JsonSerializer } from './SerializedNode'
 
-export default class XDLinkedGraphicWrapper implements JsonSerializer {
-  private xdNode: LinkedGraphic
-  private parentNodeWrapper: SceneNode
+export default class LinkedGraphicWrapper extends SceneNode implements JsonSerializer {
+  private linkedGraphic: LinkedGraphic
 
   constructor(xdNode: LinkedGraphic) {
-    this.xdNode = xdNode
-    this.parentNodeWrapper = new SceneNode(this.xdNode)
+    super(xdNode)
+    this.linkedGraphic = xdNode
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
-    if (this.parentNodeWrapper) {
-      result = this.parentNodeWrapper.toJSON()
-    }
-
-    const node = this.xdNode
-    return {
-      type: node.constructor.name,
-
-      ...result
-    }
+    const node = this.linkedGraphic
+    return Object.assign(
+      {},
+      {
+        type: node.constructor.name
+      },
+      super.toJSON()
+    )
   }
 }

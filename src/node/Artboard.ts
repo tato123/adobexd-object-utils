@@ -2,29 +2,25 @@ import GraphicsNode from './GraphicsNode'
 import { SerializedNode, JsonSerializer } from './SerializedNode'
 import { Artboard } from '../@types/scenegraph'
 
-export default class ArtboardWrapper implements JsonSerializer {
-  private xdNode: Artboard
-  private parentNodeWrapper: GraphicsNode
+export default class ArtboardWrapper extends GraphicsNode implements JsonSerializer {
+  private artboardNode: Artboard
 
   constructor(xdNode: Artboard) {
-    this.xdNode = xdNode
-    this.parentNodeWrapper = new GraphicsNode(this.xdNode)
+    super(xdNode)
+    this.artboardNode = xdNode
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
-    if (this.parentNodeWrapper) {
-      result = this.parentNodeWrapper.toJSON()
-    }
-
-    const node = this.xdNode
-    return {
-      type: node.constructor.name,
-      width: node.width,
-      height: node.height,
-      viewportHeight: node.viewportHeight,
-      ...result
-    }
+    const node = this.artboardNode
+    return Object.assign(
+      {},
+      {
+        type: node.constructor.name,
+        width: node.width,
+        height: node.height,
+        viewportHeight: node.viewportHeight
+      },
+      super.toJSON()
+    )
   }
 }

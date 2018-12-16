@@ -2,30 +2,26 @@ import { Ellipse } from '../@types/scenegraph'
 import GraphicsNode from './GraphicsNode'
 import { SerializedNode, JsonSerializer } from './SerializedNode'
 
-export default class XDEllipseWrapper implements JsonSerializer {
-  private xdNode: Ellipse
-  private parentNodeWrapper: GraphicsNode
+export default class XDEllipseWrapper extends GraphicsNode implements JsonSerializer {
+  private ellipseNode: Ellipse
 
   constructor(xdNode: Ellipse) {
-    this.xdNode = xdNode
-    this.parentNodeWrapper = new GraphicsNode(this.xdNode)
+    super(xdNode)
+    this.ellipseNode = xdNode
   }
 
   toJSON(): SerializedNode {
-    let result = {}
+    const node = this.ellipseNode
+    return Object.assign(
+      {},
+      {
+        type: node.constructor.name,
 
-    if (this.parentNodeWrapper) {
-      result = this.parentNodeWrapper.toJSON()
-    }
-
-    const node = this.xdNode
-    return {
-      type: node.constructor.name,
-
-      radiusX: node.radiusX,
-      radiusY: node.radiusY,
-      isCircle: node.isCircle,
-      ...result
-    }
+        radiusX: node.radiusX,
+        radiusY: node.radiusY,
+        isCircle: node.isCircle
+      },
+      super.toJSON()
+    )
   }
 }

@@ -9,8 +9,6 @@ export default class XDColorWrapper implements JsonSerializer {
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
     const node = this.xdNode
     return {
       type: node.constructor.name,
@@ -18,8 +16,7 @@ export default class XDColorWrapper implements JsonSerializer {
       a: node.a,
       r: node.r,
       g: node.g,
-      b: node.b,
-      ...result
+      b: node.b
     }
   }
 }

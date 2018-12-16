@@ -2,28 +2,23 @@ import { SymbolInstance } from '../@types/scenegraph'
 import SceneNode from './SceneNode'
 import { SerializedNode, JsonSerializer } from './SerializedNode'
 
-export default class XDSymbolInstanceWrapper implements JsonSerializer {
-  private xdNode: SymbolInstance
-  private parentNodeWrapper: SceneNode
+export default class SymbolInstanceWrapper extends SceneNode implements JsonSerializer {
+  private symbolInstance: SymbolInstance
 
   constructor(xdNode: SymbolInstance) {
-    this.xdNode = xdNode
-    this.parentNodeWrapper = new SceneNode(this.xdNode)
+    super(xdNode)
+    this.symbolInstance = xdNode
   }
 
   toJSON(): SerializedNode {
-    let result = {}
-
-    if (this.parentNodeWrapper) {
-      result = this.parentNodeWrapper.toJSON()
-    }
-
-    const node = this.xdNode
-    return {
-      type: node.constructor.name,
-
-      symbolId: node.symbolId,
-      ...result
-    }
+    const node = this.symbolInstance
+    return Object.assign(
+      {},
+      {
+        type: node.constructor.name,
+        symbolId: node.symbolId
+      },
+      super.toJSON()
+    )
   }
 }
