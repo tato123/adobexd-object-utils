@@ -1,6 +1,6 @@
 {
   "name": "adobexd-object-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wrapper for XD Elements, Artboard and document to convert to json",
   "main": "dist/adobexd-object-utils.js",
   "typings": "dist/types/adobexd-object-utils.d.ts",
